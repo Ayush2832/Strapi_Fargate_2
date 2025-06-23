@@ -38,13 +38,13 @@ jobs:
             cat ./strapi10/env
             cat ./strapi10/env
         
-        # - name: Build image
-        #   run: |
-        #     docker build -t ${{env.IMAGE_NAME}}:v1 ./strapi10/
+        - name: Build image
+          run: |
+            docker build -t ${{env.IMAGE_NAME}}:v1 ./strapi10/
 
-        # - name: Push the image
-        #   run: |
-        #     docker push ${{env.IMAGE_NAME}}:v1 
+        - name: Push the image
+          run: |
+            docker push ${{env.IMAGE_NAME}}:v1 
 
         - name: Upload .env as artifact
           uses: actions/upload-artifact@v4
