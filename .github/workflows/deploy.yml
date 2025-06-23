@@ -25,6 +25,11 @@ jobs:
         - name: Creating env file
           run: |
             printf "%s" "${{secrets.ENV_FILE}}" > ./strapi10/.env
+
+        - name: dir structure
+          run: |
+            ls -al
+            pwd
         
         - name: Build image
           run: |
