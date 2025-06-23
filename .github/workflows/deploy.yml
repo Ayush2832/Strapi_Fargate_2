@@ -35,7 +35,8 @@ jobs:
             ls -al
             ls -al ./strapi10
             ls -al ./strapi10/.env
-            cat env
+            cat ./strapi10/env
+            cat ./strapi10/env
         
         # - name: Build image
         #   run: |
