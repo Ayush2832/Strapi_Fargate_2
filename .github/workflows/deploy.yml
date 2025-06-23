@@ -34,7 +34,7 @@ jobs:
             pwd
 
             ls -al ./strapi10
-            cat strapi10/.env
+            cat ./strapi10/.env
         
         # - name: Build image
         #   run: |
@@ -48,5 +48,5 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
              name: env-file
-             path: ./strapi10/.env
+             path: ./strapi10/Dockerfile
         
