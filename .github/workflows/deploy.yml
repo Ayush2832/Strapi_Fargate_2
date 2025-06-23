@@ -27,14 +27,6 @@ jobs:
             cat <<EOF > ./strapi10/.env
             ${{secrets.ENV_FILE}}
             EOF
-
-        - name: dir structure
-          run: |
-            ls -al
-            pwd
-
-            ls -al ./strapi10
-            cat ./strapi10/.env
         
         # - name: Build image
         #   run: |
@@ -47,6 +39,7 @@ jobs:
         - name: Upload .env as artifact
           uses: actions/upload-artifact@v4
           with:
+             include-hidden-files: true
              name: env-file
              path: ./strapi10
         
