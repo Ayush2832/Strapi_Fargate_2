@@ -33,7 +33,7 @@ jobs:
             ls -al
             pwd
 
-            ls -al /strapi10
+            ls -al ./strapi10
             cat strapi10/.env
         
         # - name: Build image
