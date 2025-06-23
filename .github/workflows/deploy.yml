@@ -24,7 +24,7 @@ jobs:
 
         - name: Creating env file
           run: |
-            echo "${{secrets.ENV_FILE}}"" > ./strapi10/.env
+            echo "${{secrets.ENV_FILE}}" > ./strapi10/.env
         
         - name: Build image
           run: |
