@@ -24,13 +24,19 @@ jobs:
 
         - name: Creating env file
           run: |
-            echo "${{secrets.ENV_FILE}}" > ./strapi10/.env
+            printf "%s" "${{secrets.ENV_FILE}}" > ./strapi10/.env
         
         - name: Build image
           run: |
-            docker build -t ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} ./strapi10
+            docker build -t ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} ./strapi10/
 
         - name: Push the image
           run: |
             docker push ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} 
+
+        - name: Upload .env as artifact
+          uses: actions/upload-artifact@v4
+          with:
+             name: env-file
+             path: ./strapi10/.env
         
