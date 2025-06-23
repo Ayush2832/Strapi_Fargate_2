@@ -28,7 +28,7 @@ jobs:
         
         - name: Build image
           run: |
-            docker build -t ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} ./Strapi10
+            docker build -t ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} ./strapi10
 
         - name: Push the image
           run: |
