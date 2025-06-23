@@ -42,7 +42,7 @@ jobs:
           run: |
             docker build -t ${{env.IMAGE_NAME}}:v1 ./strapi10/
 
-        - name: Push the image
+        - name: Push the image to docker hub
           run: |
             docker push ${{env.IMAGE_NAME}}:v1 
 
