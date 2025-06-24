@@ -29,16 +29,29 @@ jobs:
         
         - name: Build image
           run: |
-            docker build -t ${{env.IMAGE_NAME}}:v2 ./strapi10/
+            docker build -t ${{env.IMAGE_NAME}}:v5 ./strapi10/
 
         - name: Push the image to docker hub
           run: |
-            docker push ${{env.IMAGE_NAME}}:v2 
+            docker push ${{env.IMAGE_NAME}}:v5 
 
-        - name: Upload .env as artifact
+        - name: terraform setup
+          uses: hashicorp/setup-terraform@v3
+
+        - name: Terraform init
+          run: terraform init
+          working-directory: ./terraform
+
+        - name: Terraform Apply
+          run: terraform apply -auto-approve
+          working-directory: ./terraform
+          env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        - name: Import terrfrom.tfstate file as artifact
           uses: actions/upload-artifact@v4
           with:
-             include-hidden-files: true
-             name: env-file
-             path: ./strapi10
+            name: location of terraform file
+            path: ./terraform/terraform.tfstate
         

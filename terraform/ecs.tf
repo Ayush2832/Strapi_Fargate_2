@@ -2,6 +2,15 @@ resource "aws_ecs_cluster" "main" {
   name = var.strapi_cluster
 }
 
+resource "aws_cloudwatch_log_group" "strapi_logs" {
+  name              = "/ecs/strapi"
+  retention_in_days = 7
+
+  tags = {
+    Name = "Strapi-loggroup"
+  }
+}
+
 resource "aws_security_group" "strapi_sg" {
   name   = "ecs-sg"
   vpc_id = aws_vpc.main.id
@@ -40,7 +49,7 @@ resource "aws_ecs_task_definition" "strapi" {
   container_definitions = jsonencode([
     {
       name      = "strapi"
-      image     = "ayush2832/strapi3:v4"
+      image     = "ayush2832/strapi3:v5"
       essential = true
       portMappings = [
         {
@@ -73,6 +82,14 @@ resource "aws_ecs_service" "strapi" {
     security_groups = [aws_security_group.strapi_sg.id]
     assign_public_ip = true
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.strapi_tg.arn
+    container_name   = "strapi"
+    container_port   = 1337
+  }
+
+  depends_on = [aws_lb_listener.http_listener]
 
 }
 
