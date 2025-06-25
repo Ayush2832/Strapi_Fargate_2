@@ -84,9 +84,13 @@ resource "aws_ecs_service" "strapi" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.strapi_tg.arn
+    target_group_arn = aws_lb_target_group.strapi_blue.arn
     container_name   = "strapi"
     container_port   = 1337
+  }
+
+  deployment_controller {
+    type = "CODE_DEPLOY"
   }
 
   depends_on = [aws_lb_listener.http_listener]

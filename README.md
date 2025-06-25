@@ -1,4 +1,4 @@
-# Task10 Host/Publish the Project
+# Task10 Host/Publish the Project and Task 11
 After logging in:
 - Create Content Types (Collections, Singles, etc.).
 - Use Roles & Permissions to allow public access if needed.
@@ -122,3 +122,21 @@ jobs:
 - We can also use thunder client for that
 
 <image src="images/4.png" width="500">
+
+# Task 11: Manual deplyment with code dpeloy
+- In this first we push the images to docker
+- Then we create new version of task definition where we jsut update the version
+- We create new deployment in `Code Deploy` and then we will then create new deployment 
+- We then define the appspec there. And in appspec me make changes for container name, task definiiotn, region, account id, and task version
+```yml
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:region:aws_account_id:task-definition/tutorial-task-def:2"
+        LoadBalancerInfo:
+          ContainerName: "sample-app"
+          ContainerPort: 80
+        PlatformVersion: "LATEST"
+```
