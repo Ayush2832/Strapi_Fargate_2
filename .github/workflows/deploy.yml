@@ -2,7 +2,7 @@ name: Strapi_Fargate
 
 on:
   push:
-    branches: developer
+    branches: master
 
 jobs:
     Strapi_task:
